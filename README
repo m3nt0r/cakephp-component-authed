@@ -1,0 +1,27 @@
+Authed Component, 
+ PHP versions 4 and 5
+ 
+Custom scope rules for AuthComponent
+
+The purpose of this extension is to add a flexible rule setup to
+the login process. You could compare their setup to model validation.
+The rules are applied just before the usual auth is issued.
+
+Note: This extension overwrites Auth::login()
+
+Example:
+
+  $this->Authed->loginError = __("Wrong password / username. Please try again.", true);
+  $this->Authed->authError = __("Sorry, you are not authorized. Please log in first.", true);
+
+  $this->Authed->userScopeRules = array(
+    'is_banned' => array(
+      'expected' => 0,
+      'message' => __("You are banned from this service. Sorry.", true)
+    ),
+    'is_validated' => array(
+      'expected' => 1,
+      'message' => __("Your account is not active yet. Click the Link in our Mail.", true)
+    )
+  );
+
